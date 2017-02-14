@@ -2,4 +2,5 @@ site_name: qyl's Docs
 pages:
     - Home: index.md
     # - About: about.md
+    - MySQL: mysql.md
 theme: readthedocs
