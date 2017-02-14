@@ -1,5 +1,5 @@
 site_name: qyl's Docs
 pages:
     - Home: index.md
-    - About: about.md
+    # - About: about.md
 theme: readthedocs
