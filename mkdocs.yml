@@ -3,4 +3,5 @@ pages:
     - Home: index.md
     # - About: about.md
     - MySQL: mysql.md
+    - Git: git.md
 theme: readthedocs
