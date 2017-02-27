@@ -19,3 +19,31 @@
 
 * 可能会由于一个临时性的网络中断而断开连接
 * 发送探测报文的间隔（2 小时）一般不可以根据应用进行配置
+
+## RPC
+
+### 论文
+
+* RFC 707
+* Implementing Remote Procedure Calls
+* RFC 1831
+* RFC 1832(XDR)
+* RFC 1833(RPCBIND)
+
+### 争议
+
+* http://www.kohala.com/start/papers.others/rpc.comments.txt
+
+### 服务器捆绑
+
+1. 系统进入多用户模式时，端口映射器启动（portmap 或 rpcbind）
+2. 服务器启动时，main 调用 svc_create。其确定本主机所支持的网络协议，为每个协议创建一个传输端点，给 TCP 和 UDP 端点各捆绑一个临时端口。该函数和本地端口映射器联系，注册临时端口号和调用程序的 RPC 程序号和版本号。客户在创建句柄时选择使用哪个协议（clnt_create）
+3. 客户启动并调用 clnt_create。向服务器主机的端口映射器发送一个 RPC 请求，询问关于所指定的程序、版本和协议的信息。成功的话，作为答复的服务器端口号就保存到客户句柄，供将来使用该句柄的所有 RPC 调用参考
+
+32 位的程序号划分成组：
+
+* 0x00000000 - 0x1fffffff: Sun 定义
+* 0x20000000 - 0x3fffffff: 用户定义
+* 0x40000000 - 0x5fffffff: 临时
+* 0x60000000 - 0xffffffff: 保留
+
