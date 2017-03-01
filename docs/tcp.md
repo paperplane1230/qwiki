@@ -32,7 +32,7 @@
 
 ### 争议
 
-* ![有关评论](http://www.kohala.com/start/papers.others/rpc.comments.txt)
+* [有关评论](http://www.kohala.com/start/papers.others/rpc.comments.txt)
 
 ### 服务器捆绑
 
