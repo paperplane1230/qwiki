@@ -5,3 +5,4 @@ pages:
     - MySQL: mysql.md
     - Git: git.md
     - TCP: tcp.md
+    - Linux: linux.md
