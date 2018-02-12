@@ -7,3 +7,4 @@ pages:
     - TCP: tcp.md
     - Linux: linux.md
     - BlockChain: blockchain.md
+    - BRPC: brpc.md
