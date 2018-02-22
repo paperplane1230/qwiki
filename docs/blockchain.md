@@ -46,6 +46,8 @@ Secure Hash Algorithm 256，SHA-256
 
 每个输出都要和一个特定的公钥（地址）对应
 
+UTXO: Unspent TX(Transaction) Output
+
 ## 比特币脚本
 
 交易的输入包括了脚本（而不是签名）
