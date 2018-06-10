@@ -8,4 +8,5 @@ pages:
     - Linux: linux.md
     - BlockChain: blockchain.md
     - BRPC: brpc.md
-    - 交易: trade.md
+    - 交易:
+        - 技术指标: index.md
