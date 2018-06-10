@@ -9,4 +9,4 @@ pages:
     - BlockChain: blockchain.md
     - BRPC: brpc.md
     - 交易:
-        - 技术指标: index.md
+        - 技术指标: trade_index.md
