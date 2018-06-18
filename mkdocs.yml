@@ -10,3 +10,4 @@ pages:
     - BRPC: brpc.md
     - 交易:
         - 技术指标: trade_index.md
+    - 德扑: poker.md
