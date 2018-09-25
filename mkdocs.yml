@@ -11,3 +11,9 @@ pages:
     - 交易:
         - 技术指标: trade_index.md
     - 德扑: poker.md
+
+extra_javascript:
+    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+
+markdown_extensions:
+    - math
