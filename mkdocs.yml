@@ -12,6 +12,7 @@ pages:
         - 技术指标: trade_index.md
         - K 线: trade_k.md
         - 交易系统: trade_system.md
+        - 量化: quant.md
     - 德扑: poker.md
 
 extra_javascript:
