@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>交易系统 - Yummy's Docs</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">Yummy's Docs</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                    <li >
+                        <a href="../mysql/">MySQL</a>
+                    </li>
+                    <li >
+                        <a href="../git/">Git</a>
+                    </li>
+                    <li >
+                        <a href="../tcp/">TCP</a>
+                    </li>
+                    <li >
+                        <a href="../linux/">Linux</a>
+                    </li>
+                    <li >
+                        <a href="../blockchain/">BlockChain</a>
+                    </li>
+                    <li >
+                        <a href="../brpc/">BRPC</a>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">交易 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../trade_index/">技术指标</a>
+</li>
+                            
+<li >
+    <a href="../trade_k/">K 线</a>
+</li>
+                            
+<li class="active">
+    <a href="./">交易系统</a>
+</li>
+                            
+<li >
+    <a href="../quant/">量化</a>
+</li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="../poker/">德扑</a>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../trade_k/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../quant/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#notes-on">Notes on 交易系统</a></li>
+            <li><a href="#_1">经典图表分析法</a></li>
+            <li><a href="#_2">计算机化的技术分析</a></li>
+            <li><a href="#_3">成交量和时间</a></li>
+            <li><a href="#_4">市场指标</a></li>
+            <li><a href="#_5">交易系统</a></li>
+            <li><a href="#_7">交易工具</a></li>
+            <li><a href="#_8">风险管理</a></li>
+            <li><a href="#_9">实践细节</a></li>
+            <li><a href="#_10">保持良好的记录习惯</a></li>
+            <li><a href="#_11">史丹温斯坦系统</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="notes-on">Notes on 交易系统</h1>
+<h2 id="_1">经典图表分析法</h2>
+<p>每日开盘价往往反映了业余者对价值的看法; 每天 / 周的收盘价往往反映了专业交易者的行为, 倾向于主宰最后一小时的交易</p>
+<p>滑点在市场冷清的时候往往较小, 适合经常. 遇到很长的柱状线是兑现利润的好时机</p>
+<p>确保不同时间频率的图表传达出的买卖信息能相互印证. 如果不是, 说明市场依然处在混沌中, 要保持观望</p>
+<p>通常, 第一, 二, 三次冲击支撑 / 压力位都会反转. 达到四次, 说明市场真的想突破</p>
+<p>支撑和阻力区域越高, 力量越强</p>
+<p>走势逼近支撑或阻力位, 设定好保护性止损</p>
+<p>避免在整数价位设置保护性止损</p>
+<p>许多图表的模式和技术指标在右侧彼此矛盾, 必须在不确定的氛围中依靠概率做决定</p>
+<p>判断错误, 毫不犹豫立刻止损</p>
+<p>彼此矛盾时, 最好别进行交易</p>
+<p>不规则的高点和低点意味着震荡区间</p>
+<p>画一条 20 - 30 日的 EMA, 斜率方向表示趋势. 如果没有在月内达到一个新高或新低, 可能处于震荡区间</p>
+<p>摆动指数, 比如 MACD 柱状线创下新高, 预示一个强力趋势, 表明市场上一个顶部要被试探或超过</p>
+<p>任何趋势确认的唯一标识是其高点和低点模式</p>
+<p>平稳抬升的 EMA 确认了上升趋势. 价格快速下降到 EMA 时, 出现一次绝佳买入机会</p>
+<p>趋向系统发出新趋势开始的信号模式是, ADX 跌落到 20 以下后反弹到该水平之上, 向上穿透下趋向系统</p>
+<p>MACD 柱状线能识别非常强有力的趋势</p>
+<p>辨别出上升趋势时, 要决定是立刻买进还是等待回调. 快速买进, 保护性止损可能设置很远, 增加风险</p>
+<p>等回调入场, 等候区相当拥挤. 一个深度回调可能预示去世反转而非买入机会</p>
+<p>研究图表, 视野越长越好, 而且越轻松</p>
+<p>市场总是在波动, 寻找产生最大成交量的价位. 价格上涨却没伴随足够成交量, 市场很快会反转, 在更低价位寻找更多交易</p>
+<p>袋鼠尾反映了这种失败的突破, 标志着牛熊的最后一击. 线柱高度超过正常两倍, 被两条短线柱包围. 如果在第三条线柱做空, 止损位设在尾巴一般位置左右</p>
+<p>逆袋鼠尾方向操作是一种短期策略</p>
+<h2 id="_2">计算机化的技术分析</h2>
+<p>混乱阶段. 如果指标信号不明确, 不要试图理解其中的意思, 也不要求助其他指标, 去找下一个标的. 等待最好和最清晰的信号</p>
+<p>抓住大趋势, 可能需要 200 EMA</p>
+<p>两条 EMA 之间参数的比例大致为 2:1. 想要简单和高效, 最好在所有时间周期, 都用相同的一组参数</p>
+<p>MACD 柱状线的斜率方向和价格变动同向时, 趋势就是稳定的</p>
+<p>斜率方向比柱状线的正负重要得多. 最好根据斜率方向进行交易</p>
+<p>背离, 两个底部间有一个穿越回 0 值线的部分才是<strong>真正背离的必要因素</strong></p>
+<p>中间的反弹触及两条 EMA 间的 "价值区间" 是熊市反弹时的常见目标</p>
+<p>价格穿透到两条 EMA 间的 "价值区间" 的下方, 是牛市中断时一个相当普遍的信号</p>
+<p>"无右肩" 背离: 第二次探新高时 MACD 还没有穿过 0 线. 很罕见, 是非常强烈的信号</p>
+<p>最有价值的背离发生在, 两个顶部相隔 20 - 40 个柱状线, 越接近 20 越好, 不能相隔太远. 第二个顶部长度不超过第一个一半时, 信号最好</p>
+<p>三重背离, 比普通背离更强烈. 普通背离失效, 第三次探顶一定比第一次浅, 但不一定比第二次浅</p>
+<p>当市场对一个完美的信号无动于衷时, 表示表象下由更基础的东西在发生变化, 做好准备, 迎接新一波大趋势</p>
+<p>熊市背离的罕见场合, 可以配合抛物线止损指标做多</p>
+<p>ADX 下降时, 趋势正在减弱. 可能产生很多假突破, 最好不要用趋势跟随指标</p>
+<p>ADX 在两条趋势线下, 做好交易准备, 是暴风雨前的平静, 大趋势会从此出现</p>
+<p>当 ADX 从趋势线下的低点上升了 4 点, 是新趋势的号角</p>
+<p>ADX 回升超过两条趋势线, 表示市场过热. 从高于两条趋势线的地方掉头向下, 表示主要趋势受到阻碍, 是趋势交易兑现利润的好时机. 重仓的话, 一定要先兑现一部分利润</p>
+<p>如果是普通回调, 往往会在负一倍的 ATR 处见底. 最好在离入场点至少一倍 ATR 距离设置止损</p>
+<p>随机指标宽而向下倾斜的顶部强化了卖出信号. 底部形态通常预示这波上涨是强是弱</p>
+<p>两条随机指标线都向同一方向运动时, 肯定了短期的趋势</p>
+<p>RSI 掉头通常标示极点</p>
+<p>交易信号在短期内的 RSI 看得更清楚</p>
+<p>背离时, 如果 RSI 第一次底部低于下参考线, 第二次高于, 就是非常强烈的买入信号</p>
+<p>只有当周趋势上涨, 日线 RSI 发出的买入信号才比较有利</p>
+<h2 id="_3">成交量和时间</h2>
+<p>一旦市场中不坚定者被洗出局, 留下巨大的成交量, 市场就到了趋势将要反转的时刻. 趋势可以在温和的成交量的支撑下持续很久, 也可以在成交量骤增后逐渐消失</p>
+<p>成交量降低意味着输家供应变少, 趋势即将反转</p>
+<p>下降趋势中的成交量迅速上升相比上升趋势中的成交量迅速上升更有可能意味着趋势即将反转. 上升趋势中的成交量骤增或许会使得趋势短暂停止, 但之后更可能持续上涨</p>
+<p>低成交量下的市场爆发往往意味着新趋势下人们的情感付出不足, 价格也更倾向回归到原来的波动区间</p>
+<p>如果今天的成交量高于昨天, 今天的趋势很可能会延续</p>
+<p>一个极高成交量的底部后面常常跟着一个较小成交量的底部, 这时是绝佳的买入机会</p>
+<p>上升趋势出现回落, 由于慌张的获利了结盘, 成交量会增加. 回落持续但成交量缩水, 表明多头不再逃跑或抛压被消耗. 成交量耗尽时, 趋势将重新开始, 是很好的买入机会</p>
+<p>OBV 顶部或底部形态比绝对值重要. 根据 OBV 确认的趋势方向交易会更安全</p>
+<p>OBV 达到新高, 确认多头力量, 表明价格可能持续上涨, 给出买入信号</p>
+<p>价格在震荡区间, OBV 突破新高, 是买入信号</p>
+<p>强力指数. 如果没有和 0 线的交叉, 就不是有效的背离</p>
+<p>持仓量和季节性常态偏离时便向我们团透露出某种重要信息</p>
+<p>持仓量反映了多空分歧的程度. 上升表明多空冲突激烈, 确认现有趋势. 下降表明输家在离场, 赢家在兑现利润, 趋势接近尾声</p>
+<p>趋势的维持需要多空双方都对自己的判断有信心</p>
+<p>持仓量在价格横向走势中增加, 是空头征兆; 横向走势中持仓量减少, 是买进信号</p>
+<p>大约 80% 的看似周期的东西都只是市场噪音</p>
+<p>市场由大量的人群构成, 移动速度更慢</p>
+<p>不应在刚发现早期反转信号时就急于进场, 之后由更好的反转信号提示行动时机</p>
+<p>波段交易能做到严格的风险控制, 可能错过趋势中的主升浪</p>
+<p>卖空的行动需要更加迅速</p>
+<h2 id="_4">市场指标</h2>
+<p>分析市场的整体, 个股一半的波动是受市场整体趋势影响的</p>
+<p>新高 - 新低 (NH - NL) 指数是股票市场的最佳市场领先指标</p>
+<p>指数由负到正, 表明下降趋势已经终止, 即将上升</p>
+<p>价格运行到通道下线时, 上述信号积极有效</p>
+<p>新高 - 新低熊市背离时, 还要关注次高点的高度. 如果新高 - 新低指数最近峰值只是稍微比 0 高一些, 在 +100 以内, 随后可能出现一次重大回调, 此时应该卖空. 如果高于 +100, 表明向上力度足够, 可以避免下跌</p>
+<p>底部的牛市背离比顶部的熊市背离发展快, 要<strong>快买慢卖</strong></p>
+<p>周度新高 - 新低指数会在达到极端水平及出现背离时释放重大信号</p>
+<p>将周度新高 - 新低指数推向极端牛市或者熊市需要持续一段时间才能做到</p>
+<p>指数从 -4000 回升, 产生买入信号, 在牛市和熊市都非常强力有效</p>
+<p>达到 +2500 确认牛市, 价格将继续走高, 及时短暂回调. 反弹中不会出现此高度</p>
+<p>周线图 50 日均线以上的股票数占比反转, 通常预示该反转趋势将持续数周到数月</p>
+<p>A/D 线和大盘指数同步创新高, 上涨趋势延续的可能性更大</p>
+<p>只要多空双方还有冲突, 趋势就会持续. 群体达成强烈共识, 趋势会反转</p>
+<p>主流财经杂志封面文章也是一个很好的反向指标</p>
+<p>市场上行时, 金钱大量涌入垃圾股; 下行, 垃圾股资金流枯竭</p>
+<p>期货市场跟着套保者的操作有利可图. 将他们现有仓位和历史正常仓位对比</p>
+<p>只有当 3 个及以上公司高管或大股东在一个月内持续买入或卖出股票, 内部人的买卖才有意义</p>
+<p>大量内部人的买入比卖出行为更有预测意义</p>
+<p>总流通股的卖空比例, 倾向于在 1 - 2% 变动</p>
+<p>空头回补天数一般在 1 - 2 天</p>
+<p>参考总流通股的卖空比例和回补天数</p>
+<p>高卖空比例对任意一只股票的<strong>卖空</strong>都是危险的信号. 如果出现买入信号, 卖空比例很高, 会是积极因素</p>
+<h2 id="_5">交易系统</h2>
+<p>机械交易系统最终会失灵, 开始损失. 市场遵循并不完美的群体心理法则, 交易决策必须把心理层面考虑进去</p>
+<p>为每一笔交易计划好三个关键数字: 买入价位, 盈利目标和止损价位</p>
+<h3 id="_6">三重滤网</h3>
+<p>仅允许顺着大趋势方向交易</p>
+<p>第一重滤网使用动力系统</p>
+<p>动力系统不能告诉你应该做什么, 发出警告, 禁止你做某些事情</p>
+<p>动力系统为蓝色, 允许任意方向进行交易</p>
+<p>第二重使用震荡指标, 允许利用日线图和周线图上方向一致的信号. 使用强力指数: 今日成交量 * (今日收盘价 - 昨日收盘价)</p>
+<p>2 日强力指数 EMA 降到 0 以下, 只要不是下降到了几周内的新低点, 就会发出买入信号</p>
+<p>平均 EMA 下跌穿透:</p>
+<ol>
+<li>计算平均穿透值</li>
+<li>今日 EMA - 昨日 EMA. 结果加到今日 EMA, 作为对明日 EMA 的一个估算, 再减去平均穿透值, 作为明日买入订单的触发价位</li>
+</ol>
+<p>使用长期图标设置止盈点, 中期图表设置止损. 周线价值区间作为盈利目标</p>
+<p>动力系统: 惯性和能量, 监测系统</p>
+<p>惯性用短期 EMA; 能量用 MACD 柱状线斜率</p>
+<p>绿色禁止卖空, 红色禁止买入; 蓝色无禁止</p>
+<p>最好的买入时机是红色消失的时候; 蓝色出现在一系列远离价值区的绿色后, 考虑卖出</p>
+<p>小心谨慎入场, 快速退出</p>
+<p>动力系统颜色变得与头寸相反, 退出观望</p>
+<p>长时间周期的线图需要的通道更宽, 周线宽度通常需要是日线两倍</p>
+<p>不要在上通道线之上买入, 也不要在下通道线之下卖出</p>
+<p>反弹未能触及上通道线, 是熊市信号, 表明牛市变得更虚弱</p>
+<p>正常的波动通常在 1 倍 ATR 通道内, 只有极端的波动会冲出 3 倍 ATR, 往往预示着反转即将来临</p>
+<p>价格下降到 -2 倍 ATR 位置停止, 底部标志; 稳定在 -2 倍上方, 确认筑底完成</p>
+<p>向下假突破试探 -3 ATR, 但不能维持低价, 买入</p>
+<p>跑出 +3 ATR, 警告, 看 +2 ATR 能否支撑住, 不能则兑现利润</p>
+<p>突破是一种消耗性的运动, 往往以终止收场</p>
+<p>技术指标的最强烈信号是其和价格走势出现背离</p>
+<p>MACD 线新低表明这个低点将会被再次确认或突破</p>
+<p>布林通道对期权交易十分有用, 期权价格很大部分由市场波动性驱动. 布林通道指导在波动性很高, 期权价格很高时卖出</p>
+<p>专业的交易者通常卖出期权</p>
+<p>股票或期权最好使用常规通道线作为盈利目标</p>
+<h2 id="_7">交易工具</h2>
+<p>确保所选交易工具满足两个重要条件: 流动性和波动性</p>
+<p>Beta: 交易品种的波动性与其交易基准的波动性之间的比值</p>
+<p>基本面的价值, 特别是盈利, 是推动股价的长期因素</p>
+<p>期权的买方长期来说是亏钱的</p>
+<p>虚值越大, 期权越便宜</p>
+<p>在可能出现大幅波动的期间, 不要持有期权卖出头寸</p>
+<p>市场趋势很平, 权利金很低时, 不要卖出期权</p>
+<p>对于立权者, 最佳位置是期权到期前 2 - 3 个月的时间</p>
+<p>瞄准买进卖出 Delta 值不高于 0.1 的期权</p>
+<p>期权跌幅已经超过 80% 时, 应该退出这项交易</p>
+<p>在期权变成实值期权前退出裸卖空仓位</p>
+<p>偶尔在上升趋势顶点买入看跌期权, 暴露在时间衰减中的周期比较短. 上升趋势中, 交易股票或期货更合适</p>
+<p>只有预期发生暴跌, 看跌期权才值得购买; 避免购买离到期日还有超过两个月的看跌期权; 寻找毫无行权希望的低价看跌期权</p>
+<p>只有想在一次重大扭转中获取暴利时, 才是购买看跌期权的唯一时机</p>
+<p>供给推动的市场倾向于更快更强烈</p>
+<p>需求驱动的市场运行通道更窄, 盈利目标和风险都更小. 随着季节变化, 价格运行通道需要重新绘制, 交易策略也必须相应调整</p>
+<p>地板价取决于商品生产成本, 天花板取决于替代品的成本</p>
+<p>近月合约比远月贵, 是商品市场出现牛市的最强烈标志之一. 但利率期货升水反转是常态</p>
+<p>监测溢价缩小或扩大</p>
+<p>差价交易比方向性交易更安全, 保证金要求较低, 是为数不多的有利可图的领域之一</p>
+<p>相对便宜的市场是好的起点. 玉米, 糖和平缓时期的铜等品种适合初学者, 流动性好, 波动性大而且单价不是很贵</p>
+<h2 id="_8">风险管理</h2>
+<p>这个月总损失和持仓头寸的风险额度和达到账户总额的 6%, 本月剩下时间, 不允许进行新的交易</p>
+<p>如果市场向有利方向发展, 把止损价位调到盈亏平衡位置</p>
+<p>交易账户很大时, 对 2% 原则, 回收紧到 1% 以下</p>
+<h2 id="_9">实践细节</h2>
+<p>盈利的潜力应该至少是风险的两倍</p>
+<p>ema 和通道线可以帮助我们设定波段交易的盈利目标. 长线交易的盈利目标通常参考前期的支撑和阻力位</p>
+<p>在价值区间内兑现利润减小了不确定性, 也减少了暴露在风险中的时间</p>
+<p>在高点卖空比在低点买入需要更宽的止损空间</p>
+<p>波段交易, 止损设在更近的位置比较好. 长线, 最好设定更远的止损, 但可以交易的规模会很小</p>
+<p>把止损位设在近期的次低点, 而不是最低点附近</p>
+<p>买入评级 = (最高价 - 买入价) / (最高价 - 最低价)</p>
+<p>交易评级 = (卖出点 - 买入点) / (通道线高点 - 通道线低点)</p>
+<p>入场交易日的上通道线到下通道线之间的距离, 代表市场中波段交易的实际盈利目标</p>
+<p>获利达到通道线 30%, 就是 A 级交易</p>
+<p>为自己定义这种模式</p>
+<p>寻求 "价格背离加上假突破" 或 "回调到价值区域"</p>
+<h2 id="_10">保持良好的记录习惯</h2>
+<p>从海外市场开始, 然后是重大新闻, 主要货币及商品, 最后是重要的市场指标</p>
+<p>远东市场: 雅虎财经</p>
+<p>原油: 经济血脉</p>
+<p>黄金: 市场恐慌情绪和通胀预期的一个敏感指标</p>
+<p>波罗的海干散货运价指数(BDI). 对世界经济而言, 是一个敏感的先行指标, 波动非常大</p>
+<p>新高 / 新低: 股市最好的先行指标</p>
+<p>日线的价值: 标普最新线柱收在价值区域的上中下方, 以及和通道线关系. 帮助识别超买还是超卖</p>
+<p>强力指数: 13 日 EMA 收在中心上下和是否有背离</p>
+<p>潜在交易, 首先判断适合哪种交易系统. 如果看起来非常诱人, 但没有任何交易系统能与之匹配, 不会进行这笔交易</p>
+<p>交易阿氏评分. 对体现交易策略核心的五个问题给出明确的答案</p>
+<p>记录下一个财报披露的时间</p>
+<p>记录除息日. 分红时, 股票持有者需要交税, 空头需要支付分红</p>
+<p>退出交易两个月后回顾这笔交易</p>
+<p>已经退出的交易, 一周后继续监控, 做好准备重新进入或反向操作</p>
+<h2 id="_11">史丹温斯坦系统</h2>
+<p>技术分析特征：基于突破的，趋势交易系统</p>
+<p>核心工具：支撑＆阻力、趋势、成交量、相对强度</p>
+<p>高买高卖</p>
+<p>市场是根据预期而不是当前收益来交易的</p>
+<p>决定股票价格的是对未来的预测而不是当前的基本面信息, 市场对于已知资讯和未来预期所做出的反应</p>
+<p>不要在股价暴跌时因为觉得便宜而买进; 不要在下跌趋势中买进</p>
+<p>阻力区盘整时间越长, 最后的向上突破越可靠; 突破时成交量越大, 预示上涨势头越猛. 成交量萎缩的突破很可能是虚假的, 缺乏强有力的买方力量推动</p>
+<p>突破后反弹回撤是理想加仓时机(伴有成交量大量萎缩更好)</p>
+<p>趋势线越接近水平, 被向下突破时, 负面意味越强</p>
+<p>向上突破重要趋势线, 数天内站上上扬的长期 ma, 释放最强烈的多头信号</p>
+<p>成交量大意味急迫而强大的买盘将推动股价进一步上涨</p>
+<p>放在历史背景下看待. 创几年新高, 上涨没有了阻力, 打开了新的上涨空间, 没有需要解套的卖方, 可以涨得更高</p>
+<p>相对强度线向下倾斜, 及时价格向上突破, 也不能买入; 由负到正是利好</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script src="../js/base.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../search/require.js"></script>
+        <script src="../search/search.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&larr;</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&rarr;</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    </body>
+</html>

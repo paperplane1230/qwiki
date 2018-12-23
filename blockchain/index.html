@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>BlockChain - Yummy's Docs</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">Yummy's Docs</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                    <li >
+                        <a href="../mysql/">MySQL</a>
+                    </li>
+                    <li >
+                        <a href="../git/">Git</a>
+                    </li>
+                    <li >
+                        <a href="../tcp/">TCP</a>
+                    </li>
+                    <li >
+                        <a href="../linux/">Linux</a>
+                    </li>
+                    <li class="active">
+                        <a href="./">BlockChain</a>
+                    </li>
+                    <li >
+                        <a href="../brpc/">BRPC</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">交易 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../trade_index/">技术指标</a>
+</li>
+                            
+<li >
+    <a href="../trade_k/">K 线</a>
+</li>
+                            
+<li >
+    <a href="../trade_system/">交易系统</a>
+</li>
+                            
+<li >
+    <a href="../quant/">量化</a>
+</li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="../poker/">德扑</a>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../linux/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../brpc/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#notes-on-blockchain">Notes on BlockChain</a></li>
+            <li><a href="#_1">哈希函数</a></li>
+            <li><a href="#_4">哈希指针</a></li>
+            <li><a href="#_6">去中心化</a></li>
+            <li><a href="#_7">运行机制</a></li>
+            <li><a href="#_8">交易</a></li>
+            <li><a href="#_9">比特币脚本</a></li>
+            <li><a href="#_10">修订协议</a></li>
+            <li><a href="#_13">冷存储</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="notes-on-blockchain">Notes on BlockChain</h1>
+<h2 id="_1">哈希函数</h2>
+<p>要达到密码安全，需要三个附加特性：</p>
+<ul>
+<li>碰撞阻力</li>
+<li>隐秘性</li>
+<li>谜题友好</li>
+</ul>
+<h3 id="_2">碰撞阻力</h3>
+<p>定义：无法找到 x 和 y，x != y，而 H(x) = H(y)</p>
+<ul>
+<li>不表示不存在碰撞</li>
+<li>使得可以让哈希值作为信息摘要</li>
+</ul>
+<h3 id="_3">安全哈希算法</h3>
+<p>Secure Hash Algorithm 256，SHA-256</p>
+<ul>
+<li>MD(Merkle-Damgard) 变换</li>
+</ul>
+<h2 id="_4">哈希指针</h2>
+<h3 id="_5">区块链</h3>
+<p>哈希指针构成的链表。每个区块不仅能告诉我们上一个区块的值在哪，还包含了改值的摘要，能验证那个值是否发生了改变</p>
+<p>链表头部的哈希指针被称为<strong>创世区块</strong>(genesis block)</p>
+<h2 id="_6">去中心化</h2>
+<p>地址：公钥的哈希值</p>
+<ul>
+<li>Fischer-Lynch-Paterson: Impossibility of distributed consensus with one faulty process - 在一个多进程异步系统中，只要有一个进程不可靠，就不存在一个协议，能保证有限时间内所有进程达成一致</li>
+</ul>
+<h2 id="_7">运行机制</h2>
+<h2 id="_8">交易</h2>
+<p>比特币交易的过程其实就是不停地创造区块的过程</p>
+<ul>
+<li>元数据：交易规模、输入数量、输出数量，交易的哈希值，锁定时间(lock_time)</li>
+<li>一系列输入</li>
+<li>一系列输出</li>
+</ul>
+<p>每个输出都要和一个特定的公钥（地址）对应</p>
+<p>UTXO: Unspent TX(Transaction) Output</p>
+<h2 id="_9">比特币脚本</h2>
+<p>交易的输入包括了脚本（而不是签名）</p>
+<ul>
+<li>输出脚本（scriptPubKey）: 指定公钥</li>
+<li>输入脚本（scriptSig）: 指定对应公钥的签名</li>
+</ul>
+<p>堆栈式脚本: 每个指令只执行一次，线性，无法循环执行. 不是图灵完备的: 不能随意执行强大的函数</p>
+<p>256 个指令，每个指令一个字节: 15 个不可用，75 个被保留</p>
+<h3 id="p2sh">P2SH</h3>
+<p>支付给脚本的哈希值. P2SH 脚本只是对堆栈最顶层的数据进行哈希运算, 核验运算结果是否与给定的哈希一致。通过后，在执行一步特殊的核验：把堆栈最顶层的数据重新解读为一系列指令，将其作为脚本运行一次</p>
+<ul>
+<li>让付款方的支付工作简单化</li>
+<li>效率提升: 矿工的工作是跟踪那些还没有被消费掉的输出脚本。采用 P2SH 的输出脚本会变得很小，只不过是个哈希值。所有的复杂性都被放到输入脚本中了</li>
+</ul>
+<h2 id="_10">修订协议</h2>
+<h3 id="_11">硬分叉</h3>
+<h3 id="_12">软分叉</h3>
+<h2 id="_13">冷存储</h2>
+<h3 id="_14">分层确定性钱包</h3>
+<p>冷存储制造无限制的地址数量，通过一个短暂的、一次性的交换，让热存储知晓所有的地址</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script src="../js/base.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../search/require.js"></script>
+        <script src="../search/search.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&larr;</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&rarr;</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    </body>
+</html>

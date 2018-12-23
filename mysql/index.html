@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>MySQL - Yummy's Docs</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">Yummy's Docs</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                    <li class="active">
+                        <a href="./">MySQL</a>
+                    </li>
+                    <li >
+                        <a href="../git/">Git</a>
+                    </li>
+                    <li >
+                        <a href="../tcp/">TCP</a>
+                    </li>
+                    <li >
+                        <a href="../linux/">Linux</a>
+                    </li>
+                    <li >
+                        <a href="../blockchain/">BlockChain</a>
+                    </li>
+                    <li >
+                        <a href="../brpc/">BRPC</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">交易 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../trade_index/">技术指标</a>
+</li>
+                            
+<li >
+    <a href="../trade_k/">K 线</a>
+</li>
+                            
+<li >
+    <a href="../trade_system/">交易系统</a>
+</li>
+                            
+<li >
+    <a href="../quant/">量化</a>
+</li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="../poker/">德扑</a>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="..">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../git/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#notes-on-mysql">Notes on MySQL</a></li>
+            <li><a href="#_1">隔离级别</a></li>
+            <li><a href="#explain">Explain</a></li>
+            <li><a href="#_3">选择数据类型的原则</a></li>
+            <li><a href="#schema">schema 设计中的陷阱</a></li>
+            <li><a href="#_7">物化视图</a></li>
+            <li><a href="#_8">计数器表</a></li>
+            <li><a href="#alter-table">加快 ALTER TABLE 操作的速度</a></li>
+            <li><a href="#_9">索引</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="notes-on-mysql">Notes on MySQL</h1>
+<h2 id="_1">隔离级别</h2>
+<ul>
+<li>READ UNCOMMITTED (未提交读): 事务可以读取未提交的数据, 脏读 (Dirty Read)</li>
+<li>READ COMMITTED (提交读): 不可重复读 (nonrepeatable read), 两次执行同样的查询, 可能会得到不一样的结果</li>
+<li>REPEATABLE READ (可重复读): 保证同一个事务中多次读取同样记录的结果是一致的. 无法解决幻读 (Phantom Read): 某个事务在读取某个范围内的记录时, 另外一个事务又在该范围内<strong>插入新的记录</strong>, 之前的事务再次读取该范围内的记录时, 产生幻行 (Phantom Row). MVCC 解决幻读</li>
+<li>SERIALIZABLE (可串行化): 强制事务串行执行, 会在读取的每一行数据上都加锁</li>
+</ul>
+<h2 id="explain">Explain</h2>
+<h3 id="_2">限制</h3>
+<ul>
+<li>不会告诉你触发器、存储过程或 UDF 会如何影响查询</li>
+<li>不支持存储过程，尽管可以手动抽取查询并单独对其进行 EXPLAIN 操作</li>
+<li>不会告诉你你 MySQL 在查询执行中所做的特定优化</li>
+<li>不会显示关于查询的执行计划的所有信息</li>
+<li>不区分具有相同名字的事物。例如，对内存排序和文件排序都使用 "filesort", 并且对于磁盘上和内存上的临时表都显示 "Using temporary"</li>
+<li>可能会误导。例如，会对一个有着很小 LIMIT 的查询显示全索引扫描</li>
+</ul>
+<h2 id="_3">选择数据类型的原则</h2>
+<ul>
+<li>更小的通常更好</li>
+<li>简单就好. 使用 MySQL 内建的类型(date, time, datatime)而不是字符串来存储日期和时间; 用整型存储 IP 地址</li>
+<li>尽量避免 NULL. 对 MySQL 来说更难优化. 可为 NULL 的列会使用更多的存储空间. 如果计划在列上建索引, 应该尽量避免设计成可为 NULL</li>
+</ul>
+<p>TIMESTAMP 只使用 DATETIME 一半的存储空间, 会根据时区变化, 具有特殊的自动更新能力. 允许的时间范围要小得多</p>
+<h3 id="_4">实数类型</h3>
+<p>可以使用 DECIMAL 存储比 BIGINT还大的整数. MySQL 既支持精确类型, 也支持不精确类型. 
+浮点类型在存储同样范围的值时, 通常比 DECIMAL 使用更少的空间. 
+因为需要额外的空间和计算开销, 应该尽量只在对小数进行精确计算时才使用 DECIMAL</p>
+<h3 id="varchar">VARCHAR</h3>
+<p>下面这些情况使用 VARCHAR 是合适的:</p>
+<ul>
+<li>字符串列的最大长度比平均长度大很多</li>
+<li>列的更新很少, 碎片不是问题</li>
+<li>使用了像 UTF-8 这样复杂的字符集, 每个字符都是用不同的字节数进行存储</li>
+</ul>
+<p>在 5.0 或更高版本, MySQL 在存储和检索时会保留末尾空格; InnoDB 更灵活, 可以把过长的 VARCHAR 存储为 BLOB</p>
+<h3 id="char">CHAR</h3>
+<p>MYSQL 会删除所有的末尾空格</p>
+<ul>
+<li>适合存储很短的字符串, 或者所有值都接近同一个长度</li>
+<li>适合经常变更的数据, 不容易产生碎片</li>
+<li>对于非常短的列, 在存储空间上更有效率</li>
+</ul>
+<p>当需要存储二进制数据时, 并希望使用字节码而不是字符进行比较, BINARY 和 VARBINARY 非常有用. 二进制的有事不仅体现在大小写敏感上, 其比较也比字符比较简单得多, 也就更快</p>
+<h3 id="datetime">DATETIME</h3>
+<p>能保存大范围的值, 从 1001 年到 9999 年, 精度为秒, 与时区无关. 使用 8 个字节的存储空间</p>
+<h3 id="timestamp">TIMESTAMP</h3>
+<p>和 UNIX 时间戳相同. 只使用 4 个字节的存储空间. 显示的值也依赖于时区</p>
+<p>TIMESTAMP 空间效率比 DATETIME 高</p>
+<h3 id="bit">BIT</h3>
+<p>可以使用 BIT 列在一列中存储一个或多个 true / false. BIT(1) 定义一个包含单个位的字段, BIT(2) 存储 2 个位. 最大长度是 64 个位</p>
+<p>BIT 的行为令人费解, 应该谨慎使用. 对于大部分应用, 最好避免使用. 如果想在一个 bit 的存储空间存储一个 true / false 值, 可以创建一个空的 CHAR(0) 列, 可以保存空值(NULL) 或者长度为 0 的字符串(空字符串)</p>
+<h3 id="set">SET</h3>
+<p>如果需要保存很多 true / false, 可以考虑合并这些列到一个 SET 数据类型, MySQL 用一系列打包的位的集合表示. 有效利用存储空间. 一般来说, 无法在 SET 列通过索引查找</p>
+<h2 id="schema">schema 设计中的陷阱</h2>
+<ul>
+<li>太多的列. 存储引擎 API 工作时需要在服务器层和存储引擎层之间通过行缓冲格式拷贝数据, 在服务器层将缓冲内容编码成各个列. MyISAM 变长行结构和 InnoDB 行结构总需要转换</li>
+<li>太多关联. 如果希望查询执行得快速且并发性好, 单个查询最好在 12 个表以内做关联</li>
+<li>全能的枚举</li>
+<li>变相的枚举. 枚举列允许在列中存储一组定义值中的单个值, 集合列则允许在列中存储一组定义值中的一个或多个值</li>
+<li>非此发明(Not Invent Here)的 NULL. 当确实需要表示未知值时, 在某些场景, NULL 可能会比某个神奇常数更好</li>
+</ul>
+<h3 id="_5">范式化优点</h3>
+<ul>
+<li>更新操作比反范式化快</li>
+<li>很少或者没有重复数据, 只需要修改更少的数据</li>
+<li>表通常更小, 可以更好地放在内存里, 执行操作会更快</li>
+<li>检索列表数据时更少需要 DISTINCT 或者 GROUP BY</li>
+</ul>
+<h3 id="_6">范式化缺点</h3>
+<p>通常需要关联. 不但代价昂贵, 也可能使一些索引策略无效</p>
+<h2 id="_7">物化视图</h2>
+<p>预先计算并存储在磁盘上的表. MySQL 不原生支持物化视图. 开源工具: Flexviews</p>
+<h2 id="_8">计数器表</h2>
+<p>可以将计数器保存在多行中, 每次随机选择一行进行更新. 统计时使用聚合查询</p>
+<h2 id="alter-table">加快 ALTER TABLE 操作的速度</h2>
+<p>该操作性能对大表来说是个大问题. MySQL 执行大部分修改表结构操作的方法: 用新的结构创建一个空表, 从旧表中查出所有数据插入新表, 然后删除旧表</p>
+<p>一般而言, 大部分该操作会导致 MySQL 服务中断. 对常见的场景, 能使用的技巧只有两种:</p>
+<ul>
+<li>先在一台不提供服务的机器上执行该操作, 然后和提供服务的主库进行切换</li>
+<li>影子拷贝: 用要求的表结构创建一张和源表无关的新表, 通过重命名和删表操作交换两张表. 有相关工具</li>
+</ul>
+<p>理论上, <strong>改变列的默认值</strong>可以跳过创建新表的步骤. 列的默认值实际存在表的 <code>.frm</code> 文件, 可以直接修改这个文件. 目前没有采用这种优化, 所有的 <code>MODIFY COLUMN</code> 操作都会导致表重建</p>
+<p><code>ALTER COLUMN</code> 会直接修改 <code>.frm</code> 文件而不涉及表数据, 操作非常快.</p>
+<p><code>ALTER TABLE</code> 允许用 <code>ALTER COLUMN</code>, <code>MODIFY COLUMN</code>, <code>CHANGE COLUMN</code> 修改列, 每个操作都不同</p>
+<h2 id="_9">索引</h2>
+<h3 id="b-tree">可以使用 B-Tree 索引的查询类型</h3>
+<ul>
+<li>全值匹配: 和索引中的所有列进行匹配</li>
+<li>匹配最左前缀</li>
+<li>匹配列前缀: 可以只匹配某一列的值的开头部分</li>
+<li>匹配范围值</li>
+<li>精确匹配某一列并范围匹配另一列</li>
+<li>只访问索引的查询: 查询只需访问索引, 无需访问数据行</li>
+</ul>
+<h3 id="b-tree_1">B-Tree 限制</h3>
+<ul>
+<li>如果不是按索引最左列开始查找, 无法使用索引</li>
+<li>不能跳过索引中的列</li>
+<li>如果查询中有某个列的范围查询, 右边所有列都无法使用索引优化查找. 如果范围查询列值的数量有限, 可以通过使用多个等于条件代替范围查找</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script src="../js/base.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../search/require.js"></script>
+        <script src="../search/search.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&larr;</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&rarr;</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    </body>
+</html>

@@ -1,2 +1,0 @@
-# qwiki
-Personal wiki.

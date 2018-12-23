@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>TCP - Yummy's Docs</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">Yummy's Docs</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                    <li >
+                        <a href="../mysql/">MySQL</a>
+                    </li>
+                    <li >
+                        <a href="../git/">Git</a>
+                    </li>
+                    <li class="active">
+                        <a href="./">TCP</a>
+                    </li>
+                    <li >
+                        <a href="../linux/">Linux</a>
+                    </li>
+                    <li >
+                        <a href="../blockchain/">BlockChain</a>
+                    </li>
+                    <li >
+                        <a href="../brpc/">BRPC</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">交易 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../trade_index/">技术指标</a>
+</li>
+                            
+<li >
+    <a href="../trade_k/">K 线</a>
+</li>
+                            
+<li >
+    <a href="../trade_system/">交易系统</a>
+</li>
+                            
+<li >
+    <a href="../quant/">量化</a>
+</li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="../poker/">德扑</a>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../git/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../linux/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#notes-on-tcp">Notes on TCP</a></li>
+            <li><a href="#keepalive">保活定时器（keepalive）</a></li>
+            <li><a href="#rpc">RPC</a></li>
+            <li><a href="#_6">作为守护进程启动的步骤</a></li>
+            <li><a href="#_7">排队的数据量</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="notes-on-tcp">Notes on TCP</h1>
+<h2 id="keepalive">保活定时器（keepalive）</h2>
+<p>如果一个给定的连接在两小时内没有任何动作，服务器就向客户发送一个探查报文段。客户端必须处于以下 4 个状态之一：</p>
+<ul>
+<li>主机正常运行，且从服务器可达。客户 TCP 响应正常，服务器两小时后将保活定时器复位。如果期间有通信量通过此连接，则定时器在交换数据后的未来两小时再复位</li>
+<li>客户端主机已崩溃，并且关闭 或者 正在重启。客户 TCP 无响应，75 秒后超时。服务器共发送 10 个这样的探查，每个间隔 75 秒。如果都没有响应，认为客户主机已关闭并终止连接</li>
+<li>客户主机崩溃并已经重启。响应是一个复位，使服务器终止该连接</li>
+<li>客户主机正常，但从服务器不可达。和状态 2 相同，TCP 不能区分该状态和状态 2 的区别</li>
+</ul>
+<h3 id="_1">优点</h3>
+<ul>
+<li>通常比显式编写应用层探测报文容易</li>
+<li>比应用层探测报文占用更少带宽（keepalive 探测报文和应答不包含任何数据）</li>
+<li>如果连接不空闲，不会发送探测报文</li>
+</ul>
+<h3 id="_2">缺点</h3>
+<ul>
+<li>可能会由于一个临时性的网络中断而断开连接</li>
+<li>发送探测报文的间隔（2 小时）一般不可以根据应用进行配置</li>
+</ul>
+<h2 id="rpc">RPC</h2>
+<h3 id="_3">论文</h3>
+<ul>
+<li>RFC 707</li>
+<li>Implementing Remote Procedure Calls</li>
+<li>RFC 1831</li>
+<li>RFC 1832(XDR)</li>
+<li>RFC 1833(RPCBIND)</li>
+</ul>
+<h3 id="_4">争议</h3>
+<ul>
+<li><a href="http://www.kohala.com/start/papers.others/rpc.comments.txt">有关评论</a></li>
+</ul>
+<h3 id="_5">服务器捆绑</h3>
+<ol>
+<li>系统进入多用户模式时，端口映射器启动（portmap 或 rpcbind）</li>
+<li>服务器启动时，main 调用 svc_create。其确定本主机所支持的网络协议，为每个协议创建一个传输端点，给 TCP 和 UDP 端点各捆绑一个临时端口。该函数和本地端口映射器联系，注册临时端口号和调用程序的 RPC 程序号和版本号。客户在创建句柄时选择使用哪个协议（clnt_create）</li>
+<li>客户启动并调用 clnt_create。向服务器主机的端口映射器发送一个 RPC 请求，询问关于所指定的程序、版本和协议的信息。成功的话，作为答复的服务器端口号就保存到客户句柄，供将来使用该句柄的所有 RPC 调用参考</li>
+</ol>
+<p>32 位的程序号划分成组：</p>
+<ul>
+<li>0x00000000 - 0x1fffffff: Sun 定义</li>
+<li>0x20000000 - 0x3fffffff: 用户定义</li>
+<li>0x40000000 - 0x5fffffff: 临时</li>
+<li>0x60000000 - 0xffffffff: 保留</li>
+</ul>
+<h2 id="_6">作为守护进程启动的步骤</h2>
+<ul>
+<li>调用 <code>fork</code> 转到后台运行</li>
+<li>调用 <code>setsid</code> 建立一个新的 POSIX 会话并成为会话头进程</li>
+<li>再次 fork 避免无意中获得新的控制终端</li>
+<li>改变工作目录和文件创建模式掩码</li>
+<li>关闭非必要的描述符</li>
+</ul>
+<p>作为守护进程编写的程序可能是从某个系统启动命令脚本执行的，<strong>不应该</strong>假设任何出错消息都能写到某个终端。所有出错消息都应该使用 <code>syslog</code> 登记</p>
+<h2 id="_7">排队的数据量</h2>
+<ul>
+<li>既想查看数据，又想数据仍然留在接受队列中供本进程其他部分稍后读取，可以使用 MSG_PEEK 标志。就 UDP 而言，假设其接收队列已有一个数据报，指定 MSG_PEEK 调用一次 recvfrom，稍后不指定该标志再调用一次，即使另有数据报在这两次调用之间加入套接字接收队列，两次调用返回值也完全相同</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script src="../js/base.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../search/require.js"></script>
+        <script src="../search/search.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&larr;</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&rarr;</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    </body>
+</html>
