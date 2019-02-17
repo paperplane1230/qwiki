@@ -13,6 +13,7 @@ pages:
         - K 线: trade_k.md
         - 交易系统: trade_system.md
         - 量化: quant.md
+        - 价值投资: invest.md
     - 德扑: poker.md
 
 extra_javascript:
