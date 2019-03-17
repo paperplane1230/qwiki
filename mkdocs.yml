@@ -15,6 +15,7 @@ pages:
         - 量化: quant.md
         - 价值投资: invest.md
     - 德扑: poker.md
+    - 阅读: book.md
 
 extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
