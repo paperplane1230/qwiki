@@ -872,13 +872,18 @@
         },
         {
             "location": "/book/",
-            "text": "Notes on Reading",
+            "text": "Notes on Reading\n\n\n\u9605\u8bfb\u7684\u5c42\u6b21\n\n\n\n\n\u57fa\u7840\u9605\u8bfb\n\n\n\u68c0\u89c6\u9605\u8bfb\n\n\n\u5206\u6790\u9605\u8bfb\n\n\n\u4e3b\u9898\u9605\u8bfb",
             "title": "\u9605\u8bfb"
         },
         {
             "location": "/book/#notes-on-reading",
             "text": "",
             "title": "Notes on Reading"
+        },
+        {
+            "location": "/book/#_1",
+            "text": "\u57fa\u7840\u9605\u8bfb  \u68c0\u89c6\u9605\u8bfb  \u5206\u6790\u9605\u8bfb  \u4e3b\u9898\u9605\u8bfb",
+            "title": "\u9605\u8bfb\u7684\u5c42\u6b21"
         },
         {
             "location": "/learn/",
