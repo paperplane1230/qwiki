@@ -10,118 +10,119 @@
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>价值投资 - Yummy's Docs</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="../css/highlight.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <script src="../js/jquery-1.10.2.min.js"></script>
-        <script src="../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../js/highlight.pack.js"></script> 
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
+            <div class="container">
 
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="..">Yummy's Docs</a>
-        </div>
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">Yummy's Docs</a>
+                </div>
 
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-                <!-- Main navigation -->
-                <ul class="nav navbar-nav">
-                    <li >
-                        <a href="..">Home</a>
-                    </li>
-                    <li >
-                        <a href="../mysql/">MySQL</a>
-                    </li>
-                    <li >
-                        <a href="../git/">Git</a>
-                    </li>
-                    <li >
-                        <a href="../tcp/">TCP</a>
-                    </li>
-                    <li >
-                        <a href="../linux/">Linux</a>
-                    </li>
-                    <li >
-                        <a href="../blockchain/">BlockChain</a>
-                    </li>
-                    <li >
-                        <a href="../brpc/">BRPC</a>
-                    </li>
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">交易 <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">Home</a>
+                            </li>
+                            <li >
+                                <a href="../mysql/">MySQL</a>
+                            </li>
+                            <li >
+                                <a href="../git/">Git</a>
+                            </li>
+                            <li >
+                                <a href="../tcp/">TCP</a>
+                            </li>
+                            <li >
+                                <a href="../linux/">Linux</a>
+                            </li>
+                            <li >
+                                <a href="../blockchain/">BlockChain</a>
+                            </li>
+                            <li >
+                                <a href="../brpc/">BRPC</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">交易 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../trade_index/">技术指标</a>
 </li>
-                            
+                                    
 <li >
     <a href="../trade_k/">K 线</a>
 </li>
-                            
+                                    
 <li >
     <a href="../trade_system/">交易系统</a>
 </li>
-                            
+                                    
 <li >
     <a href="../quant/">量化</a>
 </li>
-                            
+                                    
 <li class="active">
     <a href="./">价值投资</a>
 </li>
+                                </ul>
+                            </li>
+                            <li >
+                                <a href="../poker/">德扑</a>
+                            </li>
+                            <li >
+                                <a href="../book/">阅读</a>
+                            </li>
+                            <li >
+                                <a href="../learn/">学习</a>
+                            </li>
                         </ul>
-                    </li>
-                    <li >
-                        <a href="../poker/">德扑</a>
-                    </li>
-                    <li >
-                        <a href="../book/">阅读</a>
-                    </li>
-                    <li >
-                        <a href="../learn/">学习</a>
-                    </li>
-                </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                        <i class="fa fa-search"></i> Search
-                    </a>
-                </li>
-                    <li >
-                        <a rel="next" href="../quant/">
-                            <i class="fa fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="prev" href="../poker/">
-                            Next <i class="fa fa-arrow-right"></i>
-                        </a>
-                    </li>
-            </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../quant/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../poker/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
@@ -135,6 +136,8 @@
             <li><a href="#_6">积极性投资者的证券组合策略：被动的方法</a></li>
             <li><a href="#_7">积极性投资者的证券组合策略：主动的方法</a></li>
             <li><a href="#_8">投资者与市场波动</a></li>
+            <li><a href="#_9">基金投资</a></li>
+            <li><a href="#_10">投资者和投资顾问</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -183,7 +186,7 @@
 <p>公司陷入困境时债券的表现，几乎类似于正常企业的普通股</p>
 <p>在普通股领域的特定业务，可以分为以下 4 个方面：</p>
 <ol>
-<li>低买高买</li>
+<li>低买高卖</li>
 <li>购买仔细挑选出的 “成长股”</li>
 <li>购买各种廉价证券</li>
 <li>购买 “特殊” 股票</li>
@@ -217,18 +220,24 @@
 <p>超出账面值的溢价越大，决定公司内在价值的基础就越不稳定</p>
 <p>最好集中购买售价能较好地接近于公司有形资产价值的股票。从逻辑上讲，这样的（或更低的）购买价，应该看成是与公司资产负债相关联的，也可以看成是具有独立于市场价格波动的理由或基础的</p>
 <p>还必须要求：合理的市盈率，足够强有力的财务地位，以及今后几年内的利润至少不会下降</p>
-<p>衡量自己的投资是否成功的最好办法，不是看你是否战胜了市场，而是看你是否拥有一个有可能使自己达到目标的财务计划和行为规范</p></div>
+<p>衡量自己的投资是否成功的最好办法，不是看你是否战胜了市场，而是看你是否拥有一个有可能使自己达到目标的财务计划和行为规范</p>
+<h2 id="_9">基金投资</h2>
+<p>最佳的基金经常会拒绝接纳新的投资者，只允许已有的股东购买更多股份</p>
+<h2 id="_10">投资者和投资顾问</h2>
+<p>在决定市盈率方面，增长潜力比利润、风险和股利政策更为重要</p></div>
         </div>
 
         <footer class="col-md-12">
             <hr>
-            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script>var base_url = '..';</script>
-        <script src="../js/base.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script src="../search/require.js"></script>
-        <script src="../search/search.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"next": 78, "previous": 80, "help": 191, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+        <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
     <div class="modal-dialog">
@@ -244,7 +253,7 @@
                 </p>
                 <form role="form">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
                 <div id="mkdocs-search-results"></div>
@@ -270,19 +279,19 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><kbd>?</kbd></td>
+                    <td class="help shortcut"><kbd>?</kbd></td>
                     <td>Open this help</td>
                   </tr>
                   <tr>
-                    <td><kbd>&larr;</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td><kbd>&rarr;</kbd></td>
+                    <td class="next shortcut"><kbd>n</kbd></td>
                     <td>Next page</td>
                   </tr>
                   <tr>
-                    <td><kbd>s</kbd></td>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
                     <td>Search</td>
                   </tr>
                 </tbody>
@@ -293,7 +302,6 @@
         </div>
     </div>
 </div>
-
 
     </body>
 </html>
